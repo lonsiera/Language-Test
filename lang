@@ -1,0 +1,45 @@
+#!/bin/bash
+# Sample: Using array in shell scripts
+
+CH=(あ い う え お か き く け こ さ し す せ そ た ち つ て と な に ぬ ね の は ひ ふ へ ほ ま み む め も ら り る れ ろ や ゆ よ わ ん を)
+CH=(ア イ ウ エ オ カ キ ク ケ コ サ シ ス セ ソ タ チ ツ テ ト ナ ニ ヌ ネ ノ ハ ヒ フ ヘ ホ マ ミ ム メ モ ラ リ ル レ ロ ヤ ユ ヨ ワ ン ヲ)
+#CH=(あ い う え お か き く け こ さ し す せ そ た ち つ て と な に ぬ ね の は ひ ふ へ ほ ま み む め も ら り る れ ろ や ゆ よ わ ん を ア イ ウ エ オ カ キ ク ケ コ サ シ ス セ ソ タ チ ツ テ ト ナ ニ ヌ ネ ノ ハ ヒ フ ヘ ホ マ ミ ム メ モ ラ リ ル レ ロ ヤ ユ ヨ ワ ン ヲ)
+
+#CH=(メ テ セ チ ヌ ル フ モ レ ネ ナ)
+
+c=1
+fp=0
+#echo ${CH[@]}
+#Get size of Array
+SIZE=${#CH[@]}
+
+while [[ $c -le ${SIZE} ]]; do
+#echo "Size:"${SIZE}
+echo "Size:${#CH[@]} c=$c fp=$fp"
+	
+DIV=$((${#CH[@]}))
+R=$(($RANDOM%$DIV))
+RCH=${CH[$R]} 
+
+read -ep  "${RCH}:" K
+if [ "${K}" = "${RCH}" ] 
+then
+
+	(( c++ ))
+
+	# Remove element from array
+	CH=( ${CH[@]/$RCH} )
+#	echo ${CH[@]}
+
+#	echo "Size:${#CH[@]}"
+else
+	(( fp++))
+fi
+
+
+
+done
+
+
+
+
